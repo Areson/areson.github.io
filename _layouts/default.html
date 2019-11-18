@@ -19,14 +19,14 @@
 			</header>
 			<div class="flex-container">
 				<div class="aside aside-1">
-					<sidebar>
+					<div class="sidebar">
 						<h4>Recent Posts</h4>
 						<ul>
 							{% for post in paginator.posts %}
 							<li><a href="{{ post.url }}">{{ post.title }}</li>
 							{% endfor %}
 						</ul>
-					</sidebar>
+					</div>
 				</div>
 				<div class="aside aside-2">
 					<div class="container">
