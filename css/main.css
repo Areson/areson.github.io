@@ -47,14 +47,30 @@ ul.posts li {
     list-style: none;
 }
 
+.aside-1 {
+    padding-bottom: 50px;
+}
+
 div.sidebar {
     background-color: lightblue;
     border-radius: 4px;
     margin: 25px 30px 0px 0px;
+    height: 100%;
+}
+
+div.sidebar ul {
+    margin-top: 0;
+    padding-inline-start: 25px;
 }
 
 div.sidebar li {
     list-style: none;
+    padding-top: 3px;
+}
+
+div.sidebar h4 {
+    margin: 0px 0px 0px 25px;
+    padding-top: 5px;
 }
 
 .flex-container {
