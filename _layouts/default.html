@@ -17,8 +17,8 @@
 				</ul>
 				</nav>
 			</header>
-			<div class="grid">
-				<div class="unit four-fifths">
+			<div class="flex-container">
+				<div class="aside aside-1">
 					<sidebar>
 						<ul>
 							{% for post in paginator.posts %}
@@ -27,7 +27,7 @@
 						</ul>
 					</sidebar>
 				</div>
-				<div class="unit one-fifth">
+				<div class="aside aside-2">
 					<div class="container">
 
 					{{ content }}
