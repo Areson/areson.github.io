@@ -47,13 +47,13 @@ ul.posts li {
     list-style: none;
 }
 
-sidebar {
+div.sidebar {
     background-color: lightblue;
     border-radius: 4px;
     margin: 25px 30px 0px 0px;
 }
 
-sidebar li {
+div.sidebar li {
     list-style: none;
 }
 
