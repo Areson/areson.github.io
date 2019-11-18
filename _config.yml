@@ -4,7 +4,7 @@ description: This is a description
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
 
-theme: jekyll-theme-slate
+theme: jekyll-theme-leap-day
 
 github:
   is_project_page: false
