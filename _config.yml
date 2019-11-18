@@ -1,5 +1,11 @@
 name: Ian Oberst
+title: Ian Oberst
+description: This is a description
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
 
 theme: jekyll-theme-slate
+
+github:
+  is_project_page: false
+  show_downloads: false
