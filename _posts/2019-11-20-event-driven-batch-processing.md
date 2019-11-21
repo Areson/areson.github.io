@@ -7,9 +7,7 @@ tags:
   - Scheduled Messages
 ---
 
-{% include mermaid.html %}
-
-One of the challenges I ran into trying to move to an event-driven model for processing our data what that some data streams still needed to be aggregated at some point. I mentioned in ["Moving from Batch to Event"]({% post_url 2018-11-19-moving-from-batch-to-event %}) that some of the data points we collect need to have a daily summary created and persisted to our SQL data warehouse. We could persist all the details to a staging table and run a daily ETL to do the aggregation, or maybe move it into the cloud and hook it up to a scheduled Azure Function that would run and do the same thing.
+One of the challenges I ran into trying to move to an event-driven model for processing our data what that some data streams still needed to be aggregated at some point. I mentioned in ["Moving from Batch to Event"]({% post_url 2018-11-19-moving-from-batch-to-event %}) that some of the data points we collect need to have a daily summary created and persisted to our SQL data warehouse. We could persist all the details to a staging table and run a daily ETL to do the aggregation, or maybe move it into the cloud and hook it up to a scheduled Azure Function that would run and do the same thing. <!-- more -->
 
 All of these batch-oriented approaches just feel too...well, batch-like. The move into an event-driven model meant that we were now creating messages for each data point collected throughout the day, and work only happened if it _needed_ to. We had a JSON document created for each data set that our services collected data for. Relying on a scheduled job instead of an event had some implications that I didn't like. The job might miss some documents due to timing or have errors while processing some of the documents. If the errors are transient then we'd have to wait until the _next_ run of the job to get that data persisted. We either end up waiting a long time to have data show up or we make the job run more frequently, which means we might spend a bunch of time running the job when there is nothing to do.
 
@@ -20,6 +18,8 @@ Azure Service Bus supports [scheduled messages](https://docs.microsoft.com/en-us
 One consequence of this approach is that it generated _a lot_ of messages. If I had 10 observations for a particular data set over the course of the day then I'd issue 10 scheduled messages to kick off the processing of those points. This seems like overkill and could potentially lead to some unintended consequences. In our case we use [message sessions](https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-sessions) to prevent duplicates of the same message from being processed multiple times simultaneously by setting the session id for the processing messages to be `DataSetId-Date`. While that avoids odd race conditions I'll still have a lot of needless function invocations happening as only the first message out of all 10 is going to do anything.
 
 I had hoped that enabling [duplicate detection](https://docs.microsoft.com/en-us/azure/service-bus-messaging/duplicate-detection) on the queue would resolve the issue for me. I didn't care about generating extra messages as long as only one survived to be processed. I tried enabling duplicate detection for a short lookback period on my queue, figuring that if I scheduled my messages to arrive at the same time that they'd all show up in that window and the duplicate detection would take care of everything. Turns out there is more going on under the hood with scheduled messages that prevents this from working the way that I'd like.
+
+{% include mermaid.html %}
 
 #### Deduplication: _This is how I thought it worked_
 <div class="mermaid">
