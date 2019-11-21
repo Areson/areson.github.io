@@ -1,0 +1,35 @@
+<script src="https://unpkg.com/mermaid@8.4.2/dist/mermaid.min.js" type="text/javascript"></script>
+<script  type="text/javascript">
+	mermaid.initialize({
+		startOnLoad:true, 
+		theme: null,
+		themeCSS: `
+			.node, .actor, .labelBox, .loopLine {
+				fill: #78c7f5; 
+				color: white; 
+				stroke: #197ab3; 
+				stroke-width:3px;
+				font-size: small;
+			}
+			.edgePath .path, .actor-line, .messageLine0, .messageLine1 {
+				stroke: #197ab3;
+				stroke-wdth:3px;
+			}
+			.arrowheadPath, #arrowhead {
+				fill: #197ab3;
+			}
+			.label, .messageText, .loopText, .labelText, .noteText {
+				color: white;
+				font-size: small;
+			}
+			.edgeLabel {
+				background-color: #78c7f5;
+				padding: 2px;
+			}
+			text.actor, .messageText, .loopText, .labelText {
+				fill: white;
+				stroke-width: 0px;
+			}
+		`
+	});
+</script>
