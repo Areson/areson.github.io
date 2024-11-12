@@ -41,6 +41,9 @@ and we can calculate `A` by using the [pythagorean](https://en.wikipedia.org/wik
 import math
 A = math.sqrt(C**2 + B**2)
 ```
+
+{% include mathjax_support.html %}
+
 We also know the angle `a` is that is going to be 90 degrees in a right triangle. The leaves us with needing to find out the angle `b`. We can use the [Law of Sines](https://en.wikipedia.org/wiki/Law_of_sines) to figure this out. It states
 $A/\sin(a) = B/\sin(b) = C/\sin(c)$. Since we already know `A`, `a`, and `B`, we can solve 
 
