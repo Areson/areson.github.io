@@ -6,9 +6,8 @@ tags:
   - python
   - CMU
   - TEALS
+use_math: true
 ---
-
-{% include mathjax_support.html %}
 
 # Tracking Mouse Movement
 
