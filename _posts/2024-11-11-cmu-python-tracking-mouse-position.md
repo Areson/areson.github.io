@@ -21,10 +21,15 @@ turret = Group(base, barrel)
 ```
 
 ![](/assets/images/py-shape-and-mouse.png)
+
 we can imagine a triangle connecting the center of the shape to the tip of the mouse
+
 ![](/assets/images/py-shape-and-mouse-triangle.png)
+
 If we remove the shape and the mouse for a moment we are left with a triangle with three sides and three angles.
+
 ![](/assets/images/py-triangle-sides-and-angles.png)
+
 What do we know about this triangle? Well, right away we can easily find out the length of all three sides: `A`, `B`, and `C`. If `mouseX` and `mouseY` are the coordinates of the mouse and `x` and `y` are the coordinates of the center of the shape, then we know that
 ```python
 C = mouseX - x
