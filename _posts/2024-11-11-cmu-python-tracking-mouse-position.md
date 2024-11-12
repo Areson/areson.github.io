@@ -6,7 +6,6 @@ tags:
   - python
   - CMU
   - TEALS
-use_math: true
 ---
 
 # Tracking Mouse Movement
@@ -43,6 +42,7 @@ A = math.sqrt(C**2 + B**2)
 ```
 
 {% include mathjax_support.html %}
+<span>vv</span>
 
 We also know the angle `a` is that is going to be 90 degrees in a right triangle. The leaves us with needing to find out the angle `b`. We can use the [Law of Sines](https://en.wikipedia.org/wiki/Law_of_sines) to figure this out. It states
 $A/\sin(a) = B/\sin(b) = C/\sin(c)$. Since we already know `A`, `a`, and `B`, we can solve 
@@ -72,7 +72,7 @@ if B != 0:
 else:
     a = 0
 ```
-Why do we have `if B != 0`? If the vertical distance between the mouse and the shape becomes `0` then the mouse is directly the right (in this example) of the shape, which means the angle is really just `0`. If we didnt' include that we'd solve for `A` as $A = \sqrt{C^2 + 0^2}$ which would end up making $A = C$ and $\arcsin(C/C)$ is $\arcsin(1)$ which is 90 degrees. That calculation would result when either `B == 0` _or_ `C == 0`, but it's only correct when `C == 0` so we want to have a condition for when `B == 0`.
+Why do we have `if B != 0`? If the vertical distance between the mouse and the shape becomes `0` then the mouse is directly the right (in this example) of the shape, which means the angle is really just `0`. If we didn't include that we'd solve for `A` as $A = \sqrt{C^2 + 0^2}$ which would end up making $A = C$ and $\arcsin(C/C)$ is $\arcsin(1)$ which is 90 degrees. That calculation would result when either `B == 0` _or_ `C == 0`, but it's only correct when `C == 0` so we want to have a condition for when `B == 0`.
 
 ![A triagle where side B is zero length](/assets/images/py-triangle-sides-b-is-0.png)
 
