@@ -8,6 +8,8 @@ tags:
   - TEALS
 ---
 
+{% include _mathjax_support.html %}
+
 # Tracking Mouse Movement
 
 (This code and material is meant to be used with [CMU Academy](https://academy.cs.cmu.edu/))
