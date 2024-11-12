@@ -10,6 +10,10 @@ tags:
 
 # Tracking Mouse Movement
 
+<script type="text/javascript" async
+   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
 (This code and material is meant to be used with [CMU Academy](https://academy.cs.cmu.edu/))
 
 In some cases we want to have an object track the position of the mouse. This may mean rotating something to face towards the mouse or knowing the direction the mouse is from something so that it can move towards it. In either case the calculations we have to perform are pretty much the same. If we have a shape and the mouse on the screen, where our shape is the group `turret` (imagine we are making a tank game)
