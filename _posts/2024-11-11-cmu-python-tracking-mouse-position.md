@@ -8,7 +8,7 @@ tags:
   - TEALS
 ---
 
-{% include _mathjax_support.html %}
+{% include mathjax_support.html %}
 
 # Tracking Mouse Movement
 
@@ -72,7 +72,7 @@ else:
 ```
 Why do we have `if B != 0`? If the vertical distance between the mouse and the shape becomes `0` then the mouse is directly the right (in this example) of the shape, which means the angle is really just `0`. If we didnt' include that we'd solve for `A` as $A = \sqrt{C^2 + 0^2}$ which would end up making $A = C$ and $\arcsin(C/C)$ is $\arcsin(1)$ which is 90 degrees. That calculation would result when either `B == 0` _or_ `C == 0`, but it's only correct when `C == 0` so we want to have a condition for when `B == 0`.
 
-![A triagle where side B is zero length](../assets/images/py-triangle-sides-b-is-0.png)
+![A triagle where side B is zero length](/assets/images/py-triangle-sides-b-is-0.png)
 
 Once we have the angle `a` we can figure out how to rotate our shape...almost. One thing to note is that doing this calculation only gives us an angle between `0` and `90` degrees. In fact, if we were to sketch out the way the angle would be calculated depending on where the mouse was relative to our shape (with our shape being in the center of the diagram) it would look something like this:
 
