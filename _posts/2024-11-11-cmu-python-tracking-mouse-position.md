@@ -1,7 +1,7 @@
 ---
 title: "Tracking Mouse Movement"
 categories:
-  - Teachin
+  - Teaching
 tags:
   - python
   - CMU
@@ -20,16 +20,11 @@ barrel = Line(200, 200, 200, 180, fill="red", lineWidth=5)
 turret = Group(base, barrel)
 ```
 
-![](../assets/images/py-shape-and-mouse.png)
-
+![](/assets/images/py-shape-and-mouse.png)
 we can imagine a triangle connecting the center of the shape to the tip of the mouse
-
-![](../assets/images/py-shape-and-mouse-triangle.png)
-
+![](/assets/images/py-shape-and-mouse-triangle.png)
 If we remove the shape and the mouse for a moment we are left with a triangle with three sides and three angles.
-
-![](../assets/images/py-triangle-sides-and-angles.png)
-
+![](/assets/images/py-triangle-sides-and-angles.png)
 What do we know about this triangle? Well, right away we can easily find out the length of all three sides: `A`, `B`, and `C`. If `mouseX` and `mouseY` are the coordinates of the mouse and `x` and `y` are the coordinates of the center of the shape, then we know that
 ```python
 C = mouseX - x
@@ -74,7 +69,7 @@ Why do we have `if B != 0`? If the vertical distance between the mouse and the s
 
 Once we have the angle `a` we can figure out how to rotate our shape...almost. One thing to note is that doing this calculation only gives us an angle between `0` and `90` degrees. In fact, if we were to sketch out the way the angle would be calculated depending on where the mouse was relative to our shape (with our shape being in the center of the diagram) it would look something like this:
 
-![](../assets/images/py-angle-circle.png)
+![](/assets/images/py-angle-circle.png)
 
 Immediately we notice that this _doesn't_ give us a nice angle that we can use to adjust our shape. We will have to do some additional math and adjust our angle based on what quadrant our mouse is in. In fact, not only do we have to adjust the angle for each quadrant, we _also_ have to adjust the angle to take in to account that for shapes _increasing_ the angle always rotates the shape _clockwise_ and _decreasing_ the angle rotates it _counter-clockwise_. This is _backwards_ from how our angle is calculated in the first quadrant. Effectively we want have the angle we calculate start a `0` for the horizontal axis in quadrant 2 and _increase_ going clockwise starting at quadrant 2. This would give us the following angles as the mouse made a clockwise circle around the shape starting in quadrant 2:
 
