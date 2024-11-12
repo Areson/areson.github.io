@@ -37,7 +37,7 @@ What do we know about this triangle? Well, right away we can easily find out the
 C = mouseX - x
 B = mouseY - y
 ```
-and we can calculate `A` by using the [pythangorean](https://en.wikipedia.org/wiki/Pythagorean_theorem) $a^2 = b^2 + c^2$
+and we can calculate `A` by using the [pythagorean](https://en.wikipedia.org/wiki/Pythagorean_theorem) $a^2 = b^2 + c^2$
 ```python
 import math
 A = math.sqrt(C**2 + B**2)
