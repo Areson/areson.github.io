@@ -8,24 +8,21 @@ tags:
   - TEALS
 ---
 
-# Tracking Mouse Movement
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    TeX: {
-      equationNumbers: {
-        autoNumber: "AMS"
-      }
-    },
-    tex2jax: {
-    inlineMath: [ ['$', '$'] ],
-    displayMath: [ ['$$', '$$'] ],
-    processEscapes: true,
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
   }
-});
+};
 </script>
-<script type="text/javascript" async
-   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
+
+# Tracking Mouse Movement
 
 (This code and material is meant to be used with [CMU Academy](https://academy.cs.cmu.edu/))
 
