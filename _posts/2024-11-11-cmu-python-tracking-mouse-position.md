@@ -8,6 +8,14 @@ tags:
   - TEALS
 ---
 
+In some cases we want to have an object track the position of the mouse. This may mean rotating something to face towards the mouse or knowing the direction the mouse is from something so that it can move towards it. In either case the calculations we have to perform are pretty much the same. If we have a shape and the mouse on the screen, where our shape is the group `turret` (imagine we are making a tank game)
+
+```python
+base = Circle(200, 200, 10, fill="red")
+barrel = Line(200, 200, 200, 180, fill="red", lineWidth=5)
+turret = Group(base, barrel)
+```
+
 <script>
 MathJax = {
   tex: {
@@ -21,18 +29,6 @@ MathJax = {
 <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
-
-# Tracking Mouse Movement
-
-(This code and material is meant to be used with [CMU Academy](https://academy.cs.cmu.edu/))
-
-In some cases we want to have an object track the position of the mouse. This may mean rotating something to face towards the mouse or knowing the direction the mouse is from something so that it can move towards it. In either case the calculations we have to perform are pretty much the same. If we have a shape and the mouse on the screen, where our shape is the group `turret` (imagine we are making a tank game)
-
-```python
-base = Circle(200, 200, 10, fill="red")
-barrel = Line(200, 200, 200, 180, fill="red", lineWidth=5)
-turret = Group(base, barrel)
-```
 
 ![](/assets/images/py-shape-and-mouse.png)
 
@@ -77,11 +73,11 @@ B = mouseY - y
 A = math.sqrt(C**2 + B**2)
 
 if B != 0:
-    a = math.asin(B/A)
+    b = math.asin(B/A)
     # We need to convert a to degrees since python defaults to returning radians
-    a = math.degrees(a)
+    b = math.degrees(a)
 else:
-    a = 0
+    b = 0
 ```
 Why do we have `if B != 0`? If the vertical distance between the mouse and the shape becomes `0` then the mouse is directly the right (in this example) of the shape, which means the angle is really just `0`. If we didn't include that we'd solve for `A` as $A = \sqrt{C^2 + 0^2}$ which would end up making $A = C$ and $\arcsin(C/C)$ is $\arcsin(1)$ which is 90 degrees. That calculation would result when either `B == 0` _or_ `C == 0`, but it's only correct when `C == 0` so we want to have a condition for when `B == 0`.
 
@@ -111,15 +107,15 @@ elif mouseX < x and mouseY > y: # This is quadrant 3
    # 180. We can get this by subtracting our calculated angle
    # from 180, as the calculated angle starts at 90 and decreases as we move
    # clockwise.
-   a = 180 - a
+   b = 180 - b
 elif mouseX < x and mouseY < y: # This is quadrant 4
    # This quadrant is more straightforward. It goes from 180 to 270, and
    # our calculated angle starts at 0 and goes to 90.
-   a = 180 + a
+   b = 180 + b
 elif mouse > x and mouseY < y: # This is quadrant 1
    # This is pretty much the same thing as quadrant 3, but
    # instead of ending at 180 we end at 360.
-   a = 360 - a
+   b = 360 - b
 ```
 
 Once this calculation is done the resulting angle stored in `a` should smoothly go from `0` to `360` as we move the mouse clockwise around the quadrants, starting in quadrant 2. We now have a value we can use to rotate our shape by settings the shape's `rotateAngle` property to `a`. If we do this we will still notice that our shape doesn't quite follow the mouse as we expect, but is instead a bit behind. This is because the `rotateAngle` property is relative to the _starting position_ of our shape. Since our shape was originaly pointing _up_, that orientation represents a rotation angle of `0`. Our calculations though consider `0` to be a starting position pointing _left_. To fix this we can either change the starting position of our shape or add an offset to our rotation angle to compensate. Since we are 90 degrees off, we could simple set `rotateAngle = a + 90` and things should work as expected.
@@ -128,6 +124,9 @@ If you look closely the rotation of our shape doesn't _quite_ look right. It isn
 
 
 # Full Code
+
+(This code and material is meant to be used with [CMU Academy](https://academy.cs.cmu.edu/))
+
 ```python
 import math
 
@@ -142,11 +141,11 @@ def calculate_angle(x, y, mouseX, mouseY):
     A = math.sqrt(C**2 + B**2)
    
     if B != 0:
-        a = math.asin(B/A)
+        b = math.asin(B/A)
         # We need to convert a to degrees since python defaults to returning radians
-        a = math.degrees(a)
+        b = math.degrees(a)
     else:
-        a = 0
+        b = 0
 
      # Adjust the angle based on quadrant
     if mouseX > x and mouseY > y: # This is quadrant 2
@@ -157,17 +156,17 @@ def calculate_angle(x, y, mouseX, mouseY):
        # 180. We can get this by subtracting our calculated angle
        # from 180, as the calculated angle starts at 90 and decreases as we move
        # clockwise.
-       a = 180 - a
+       b = 180 - b
     elif mouseX < x and mouseY < y: # This is quadrant 4
        # This quadrant is more straightforward. It goes from 180 to 270, and
        # our calculated angle starts at 0 and goes to 90.
-       a = 180 + a
+       b = 180 + b
     elif mouseX > x and mouseY < y: # This is quadrant 1
        # This is pretty much the same thing as quadrant 3, but
        # instead of ending at 180 we end at 360.
-       a = 360 - a
+       b = 360 - b
 
-    return a
+    return b
     
 def onMouseMove(mouseX, mouseY):
     # Get the angle
